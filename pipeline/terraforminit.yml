@@ -1,0 +1,59 @@
+parameters: 
+- name: workingDir                     # Working directory for terraform main module.
+  type: string                          
+  default: ''  
+# Backend configuration
+- name: backendType
+  type: string    
+- name: subscription                   # Same service connection will be used to access backend and to deploy resources.
+  type: string
+- name: backendAzureRmResourceGroupName
+  type: string
+- name: backendAzureRmStorageAccountName
+  type: string
+- name: backendAzureRmContainerName
+  type: string
+- name: backendAzureRmKey
+  type: string             
+  
+steps:
+- checkout: self
+  fetchDepth: 1   
+  clean: true
+  continueOnError: false
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    workingDirectory: '${{parameters.workingDir}}'
+    backendType: '${{parameters.backendType}}'
+    backendServiceArm: '${{parameters.subscription}}'
+    backendAzureRmResourceGroupName: '${{parameters.backendAzureRmResourceGroupName}}'
+    backendAzureRmStorageAccountName: '${{parameters.backendAzureRmStorageAccountName}}'
+    backendAzureRmContainerName: '${{parameters.backendAzureRmContainerName}}'
+    backendAzureRmKey: '${{parameters.backendAzureRmKey}}'
+    allowTelemetryCollection: false
+    displayName: 'Terraform Init'
+    
+- task: TerraformCLI@0
+  inputs:
+    command: 'validate'
+    workingDirectory: '${{parameters.workingDir}}'
+    environmentServiceName: '${{parameters.subscription}}'
+    allowTelemetryCollection: false
+    displayName: 'Terraform validate'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'plan'
+    workingDirectory: '${{parameters.workingDir}}'
+    environmentServiceName: '${{parameters.subscription}}'
+    allowTelemetryCollection: false
+    displayName: 'Terraform Plan'
+    - task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '${{parameters.workingDir}}'
+    environmentServiceName: '${{parameters.subscription}}'
+    allowTelemetryCollection: false
+    displayName: 'Terraform apply'
