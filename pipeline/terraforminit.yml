@@ -50,7 +50,7 @@ steps:
     environmentServiceName: '${{parameters.subscription}}'
     allowTelemetryCollection: false
     displayName: 'Terraform Plan'
-    - task: TerraformCLI@0
+- task: TerraformCLI@0
   inputs:
     command: 'apply'
     workingDirectory: '${{parameters.workingDir}}'
