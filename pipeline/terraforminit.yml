@@ -31,7 +31,6 @@ steps:
     backendAzureRmResourceGroupName: '${{parameters.backendAzureRmResourceGroupName}}'
     backendAzureRmStorageAccountName: '${{parameters.backendAzureRmStorageAccountName}}'
     backendAzureRmContainerName: '${{parameters.backendAzureRmContainerName}}'
-    backendAzureRmKey: '${{parameters.backendAzureRmKey}}'
     allowTelemetryCollection: false
     displayName: 'Terraform Init'
     
