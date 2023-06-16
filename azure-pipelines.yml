@@ -25,7 +25,7 @@ variables:
   value: 'foldername'
 stages:
 - stage: 'Init'
-  displayName: "Terraform Plan"
+  displayName: "Terraform Plan & apply"
   jobs:
   - job:
     displayName: Init
