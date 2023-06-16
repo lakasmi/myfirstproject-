@@ -30,7 +30,7 @@ stages:
   - job:
     displayName: Init
     steps:
-    - template: 'Pipeline/terraforminit.yml'
+    - template: 'pipeline/terraforminit.yml'
       parameters:
         subscription: $(serviceconnection)
         workingDir: $(System.DefaultWorkingDirectory)/
