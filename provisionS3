@@ -1,13 +1,15 @@
-provider "aws" {
-  region = "us-west-2"  # Replace with your desired region
+provider "azurerm" {
+  features {}
 }
 
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-unique-bucket-name"  # Replace with your desired bucket name
-  acl    = "private"  # Access control setting, e.g., private, public-read, public-read-write
+resource "azurerm_storage_account" "storage" {
+  name                     = "unique-storage-account-name"
+  resource_group_name      = "resource-group-name"
+  location                 = "azure-region"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 
   tags = {
-    Name        = "My S3 Bucket"
-    Environment = "Development"
+    environment = "production"
   }
 }
