@@ -16,3 +16,9 @@ steps:
     npm install
     npm run build
   displayName: 'Install and Build'
+  - 
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/dist'
+    artifactName: 'node-app-artifact'
+  displayName: 'Publish Artifact'
