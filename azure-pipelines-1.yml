@@ -22,3 +22,19 @@ steps:
     targetPath: '$(System.DefaultWorkingDirectory)/dist'
     artifactName: 'node-app-artifact'
   displayName: 'Publish Artifact'
+  - 
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: 'current'
+    artifactName: 'node-app-artifact'
+    targetPath: '$(System.DefaultWorkingDirectory)/dist'
+  displayName: 'Download Artifact'
+  
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'subscription name'
+    appName: 'app name'
+    package: '$(System.DefaultWorkingDirectory)/dist'
+    startUpCommand: 'npm start'
+    appType: 'webApp'
+  displayName: 'Deploy to Azure App Service'
