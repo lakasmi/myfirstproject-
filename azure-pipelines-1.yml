@@ -16,13 +16,13 @@ steps:
     npm install
     npm run build
   displayName: 'Install and Build'
-  - 
+
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(System.DefaultWorkingDirectory)/dist'
     artifactName: 'node-app-artifact'
   displayName: 'Publish Artifact'
-  - 
+  
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: 'current'
@@ -35,6 +35,5 @@ steps:
     azureSubscription: 'subscription name'
     appName: 'app name'
     package: '$(System.DefaultWorkingDirectory)/dist'
-    startUpCommand: 'npm start'
     appType: 'webApp'
   displayName: 'Deploy to Azure App Service'
