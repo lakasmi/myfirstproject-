@@ -35,5 +35,5 @@ steps:
     azureSubscription: 'subscription name'
     appName: 'app name'
     package: '$(System.DefaultWorkingDirectory)/dist'
-    appType: 'webApp'
-  displayName: 'Deploy to Azure App Service'
+    appType: 's3 bucket'
+  displayName: 'Deploy to S3 bucket'
